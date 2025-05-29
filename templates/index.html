@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Generator</title>
+    <link
+    rel="stylesheet"
+    href="{{url_for('static',filename='css/style.css')}}"
+    />
+</head>
+<body>
+    <h2>Input 3 Ingredients</h2>
+    <form action="/generate_recipe" method="post">
+        <input type="text" name="ingredient" placeholder="Ingredient 1" required>
+        <input type="text" name="ingredient" placeholder="Ingredient 2" required>
+        <input type="text" name="ingredient" placeholder="Ingredient 3" required>
+        <label class="subheading" for="cuisine">
+            Choose a cuisine:</label>
+        <select name="cuisine" id="cuisine">
+            {% for cuisine in cuisines %}
+            <option value="{{ cuisine|lower|replace(' ', '_') }}">
+                {{ cuisine }}
+            </option>
+            {% endfor %}
+        </select>
+        <label class="subheading" for="restrictions">Dietary Restrictions</label>
+        <div class="checkbox-container">
+            {% for restriction in dietary_restrictions %}
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input
+                    type="checkbox"
+                    name="restrictions"
+                    value="{{ restriction|lower|replace(' ', '_') }}"/>
+                    {{ restriction }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+        <label class="subheading" for="language">
+            Choose a language:</label>
+        <select name="language" id="language">
+            {% for language in languages %}
+            <option value="{{ language|lower|replace(' ', '_') }}">
+                {{ language }}
+            </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Generate Recipe">
+    </form>
+    <footer>
+        <p>&copy; 2020700099 박근하</p>
+    </footer>
+</body>
+</html>
